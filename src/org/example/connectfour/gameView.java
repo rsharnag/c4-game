@@ -148,21 +148,41 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
 	public gameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
+		 // register our interest in hearing about changes to our surface
+        SurfaceHolder holder = getHolder();
+        holder.addCallback(this);
+        thread = new GameThread(holder, context, new Handler() );
+        setFocusable(true);
+	}
+	 @Override
+	 public void onWindowFocusChanged(boolean hasWindowFocus) {
+	        if (!hasWindowFocus) thread.pause();
 	}
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
 		// TODO Auto-generated method stub
-		
+		thread.setSurfaceSize(width, height);
 	}
 
 	public void surfaceCreated(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
+        thread.setRunning(true);
+        thread.start();
+
 		
 	}
 
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
-		
+		boolean retry = true;
+        thread.setRunning(false);
+        while (retry) {
+            try {
+                thread.join();
+                retry = false;
+            } catch (InterruptedException e) {
+            }
+        }
 	}
 	
 }

@@ -11,11 +11,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Game"
+        <activity android:name=".Game" android:theme="@android:style/Theme.NoTitleBar"
         	>
+        	 
 		</activity>
 	<activity android:name=".prefs" />
     </application>
-    <uses-sdk android:minSdkVersion="7" />
+    <uses-sdk android:minSdkVersion="8" />
 
 </manifest> 

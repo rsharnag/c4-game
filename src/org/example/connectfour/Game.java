@@ -14,8 +14,7 @@ public class Game extends Activity{
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
+	
 		mC4View=(gameView) findViewById(R.id.c4game);
 		mgameThread=mC4View.getThread();
 		if (savedInstanceState == null) {
@@ -28,5 +27,18 @@ public class Game extends Activity{
             Log.w(this.getClass().getName(), "SIS is nonnull");
         }
 	}
-	
+	@Override
+    protected void onPause() {
+		Log.w(this.getClass().getName(),"pause called");
+        super.onPause();
+        mC4View.getThread().pause(); // pause game when Activity pauses
+    }
+	@Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // just have the View's thread save its state into our Bundle
+		Log.w(this.getClass().getName(), "SIS called");
+        super.onSaveInstanceState(outState);
+        mgameThread.saveState(outState);
+        
+    }
 }
