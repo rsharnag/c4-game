@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#aa0000ff"
+    android:padding="30dip"
+    android:orientation="vertical"
+    >
+    <LinearLayout 
+    	android:orientation="vertical"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_gravity="center"
+   	 >
+		<TextView  
+			android:layout_width="wrap_content"
+   			android:layout_height="wrap_content" 
+    		android:text="@string/game_title"
+			android:layout_gravity="center"
+    		android:textColor="#bbff0000"
+    		android:paddingTop="10dip"
+	    	android:textSize="24sp"
+    		android:textStyle="bold"
+    		android:padding="15dip"
+    	/>
+    	<Button
+    		android:text="@string/new_game"
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:id="@+id/new_game_button"
+    		android:padding="5dip"
+    		
+    	/>
+    	<Button
+    		android:text="@string/multiplayer"
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:id="@+id/multiplayer_game_button"
+    		android:padding="5dip"
+    	/>
+    	<Button android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/continue_button" android:padding="5dip" android:text="@string/continue_game"></Button>
+    	<Button
+	 		android:id="@+id/setpreference"
+			 android:layout_width="fill_parent"
+			 android:layout_height="wrap_content"
+			 android:text="Settings"
+		 />
+    	<Button
+    		android:text="@string/exit"
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:id="@+id/exit_button"
+    		android:padding="5dip"
+    	/>
+    	<!-- <LinearLayout
+    	android:orientation="vertical"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_gravity="center"
+    	android:paddingTop="30dip">
+    	
+    	</LinearLayout>
+    	 -->
+    
+</LinearLayout>
+    <!-- <TextView
+    		android:layout_width="fill_parent"
+   			android:layout_height="wrap_content" 
+    		android:text="@string/adds"
+			android:layout_gravity="center"
+    		android:textColor="#bbff0000"
+    		android:textStyle="bold"
+    		android:padding="0dip"
+    		android:gravity="center"/>
+    		 -->
+</LinearLayout>
