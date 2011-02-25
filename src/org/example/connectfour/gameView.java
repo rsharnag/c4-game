@@ -3,6 +3,7 @@ package org.example.connectfour;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -65,7 +66,7 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
          // cache handles to our key sprites & other drawables
             mBallImage = context.getResources().getDrawable(
                     R.drawable.ball);
-            
+            mBackgroundImage=BitmapFactory.decodeResource(res, R.drawable.grid);
             mBallWidth=100;
             mBallHeight=100;
             mDifficulty=DIFFICULTY_LEVEL_1;
@@ -79,6 +80,34 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
         }
         public synchronized void restoreState(Bundle savedState) {
             synchronized (mSurfaceHolder) {
+            }
+        }
+        @Override
+        public void run() {
+        	
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+            while (mRun) {
+                Canvas c = null;
+                try {
+                    c = mSurfaceHolder.lockCanvas(null);
+                    synchronized (mSurfaceHolder) {
+                        if (mMode == STATE_RUNNING)
+                        doDraw(c);
+                    }
+                } finally {
+                    // do this in a finally so that if an exception is thrown
+                    // during the above, we don't leave the Surface in an
+                    // inconsistent state
+                    if (c != null) {
+                        mSurfaceHolder.unlockCanvasAndPost(c);
+                    }
+                }
             }
         }
         public Bundle saveState(Bundle map) {
@@ -95,8 +124,9 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
         }
         public void setRunning(boolean b) {
             mRun = b;
+            setState(GameThread.STATE_RUNNING);
         }
-        public void setState(int mode) {
+    public void setState(int mode) {
             synchronized (mSurfaceHolder) {
                 setState(mode, null);
             }
@@ -111,10 +141,10 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
             synchronized (mSurfaceHolder) {
                 mCanvasWidth = width;
                 mCanvasHeight = height;
-
+                int Bgheight=(int) (height*0.8);
                 // don't forget to resize the background image
-              //  mBackgroundImage = mBackgroundImage.createScaledBitmap(
-               //         mBackgroundImage, width, height, true);
+                mBackgroundImage = Bitmap.createScaledBitmap(
+                       mBackgroundImage, width, Bgheight, true);
             }
         }
         public void unpause() {
@@ -138,7 +168,11 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
             return handled;
         }
         private void doDraw(Canvas canvas) {
-        	
+        	canvas.drawBitmap(mBackgroundImage, 0,(int)(mCanvasHeight*0.2), null);
+/*
+        	Paint drawC=new Paint();
+        	drawC.setARGB(255, 255, 0, 0);
+        	canvas.drawCircle(20f, 20f, 10f, drawC);*/
         }
 	}
     private GameThread thread;
