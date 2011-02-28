@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	android:id="@+id/widget38"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	>
+	<FrameLayout
+		android:id="@+id/widget41"
+		android:layout_width="fill_parent"
+		android:layout_height="290px"
+		android:layout_below="@+id/widget39"
+		android:layout_alignParentLeft="true"
+	>
+	 	<org.example.connectfour.gameView
+      		android:id="@+id/c4game1"
+      		android:layout_width="fill_parent"
+      		android:layout_height="fill_parent"/>
+	</FrameLayout>
+	<FrameLayout
+		android:id="@+id/widget44"
+		android:layout_width="fill_parent"
+		android:layout_height="32px"
+		android:layout_below="@+id/widget41"
+		android:layout_alignParentLeft="true"
+	>
+	</FrameLayout>
+	<FrameLayout
+		android:id="@+id/widget39"
+		android:layout_width="fill_parent"
+		android:layout_height="69px"
+		android:layout_below="@+id/widget40"
+		android:layout_alignParentLeft="true"
+	>
+	
+	</FrameLayout>
+	<LinearLayout
+		android:id="@+id/widget40"
+		android:layout_width="fill_parent"
+		android:layout_height="50px"
+		android:orientation="vertical"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+	>
+	</LinearLayout>
+</RelativeLayout>

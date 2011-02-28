@@ -9,7 +9,7 @@
 	<ListPreference
 	  	android:title="Select Level"
 		android:summary="1 Easiest ,4 Hardest"
-	  	android:key="listPref"
+	  	android:key="level"
 	  	android:entries="@array/listLevels"
 	  	android:entryValues="@array/levelReturnValue"
 	  	android:defaultValue="1"/>

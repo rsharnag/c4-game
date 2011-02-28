@@ -1,11 +1,13 @@
 package org.example.connectfour;
 
 import org.example.connectfour.gameView.GameThread;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.Window;
+import android.widget.FrameLayout;
 public class Game extends Activity{
 	private GameThread mgameThread; 
 	private gameView mC4View;
@@ -13,9 +15,11 @@ public class Game extends Activity{
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.game);
-	
-		mC4View=(gameView) findViewById(R.id.c4game);
+		setContentView(R.layout.view);
+		FrameLayout frame = (FrameLayout) findViewById(R.id.widget39);
+        DropAreaView dropArea = new DropAreaView(this);
+        frame.addView(dropArea);
+		mC4View=(gameView) findViewById(R.id.c4game1);
 		mgameThread=mC4View.getThread();
 		if (savedInstanceState == null) {
             // we were just launched: set up a new game
@@ -26,6 +30,7 @@ public class Game extends Activity{
             mgameThread.restoreState(savedInstanceState);
             Log.w(this.getClass().getName(), "SIS is nonnull");
         }
+		
 	}
 	@Override
     protected void onPause() {
@@ -39,6 +44,6 @@ public class Game extends Activity{
 		Log.w(this.getClass().getName(), "SIS called");
         super.onSaveInstanceState(outState);
         mgameThread.saveState(outState);
-        
-    }
+	}   
+    
 }

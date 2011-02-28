@@ -55,6 +55,8 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
         private int mBallWidth;
         private int mDifficulty;
         private boolean mRun;
+        private int mCellSpace;
+        private int mGridTop;
         public GameThread(SurfaceHolder surfaceHolder, Context context,
                 Handler handler) {
             // get handles to some important objects
@@ -66,6 +68,8 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
          // cache handles to our key sprites & other drawables
             mBallImage = context.getResources().getDrawable(
                     R.drawable.ball);
+            //Set Cell space
+            
             mBackgroundImage=BitmapFactory.decodeResource(res, R.drawable.grid);
             mBallWidth=100;
             mBallHeight=100;
@@ -85,14 +89,14 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
         @Override
         public void run() {
         	
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 			
             while (mRun) {
+            	try {
+    				Thread.sleep(30);
+    			} catch (InterruptedException e) {
+    				e.printStackTrace();
+    			}
                 Canvas c = null;
                 try {
                     c = mSurfaceHolder.lockCanvas(null);
@@ -145,6 +149,8 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
                 // don't forget to resize the background image
                 mBackgroundImage = Bitmap.createScaledBitmap(
                        mBackgroundImage, width, Bgheight, true);
+                mCellSpace=(int)(mCanvasWidth/7);
+            	mGridTop=(int)(mCanvasHeight*0.2);
             }
         }
         public void unpause() {
@@ -168,23 +174,31 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
             return handled;
         }
         private void doDraw(Canvas canvas) {
-        	canvas.drawBitmap(mBackgroundImage, 0,(int)(mCanvasHeight*0.2), null);
-/*
-        	Paint drawC=new Paint();
-        	drawC.setARGB(255, 255, 0, 0);
-        	canvas.drawCircle(20f, 20f, 10f, drawC);*/
+        	//canvas.drawBitmap(mBackgroundImage, 0,(int)(mCanvasHeight*0.2), null);
+
+        	Paint CLine=new Paint();
+        	CLine.setARGB(255, 0, 0, 0);
+        	Paint CBackground=new Paint();
+        	CBackground.setARGB(200,100,100,100);
+        	canvas.drawRect(0,0,getWidth(),getHeight(),CBackground);
+        	
+        	for(int start=2;start<mCanvasWidth;start=start+mCellSpace)
+        		canvas.drawLine(start, 0, start, mCanvasHeight-2, CLine);
+        	canvas.drawLine(2,mCanvasHeight-2,mCanvasWidth-2,mCanvasHeight-2,CLine);
+
         }
 	}
     private GameThread thread;
+    private static int mDifficulty; 
 	public GameThread getThread() {
         return thread;
     }
 	public gameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		// TODO Auto-generated constructor stub
 		 // register our interest in hearing about changes to our surface
         SurfaceHolder holder = getHolder();
         holder.addCallback(this);
+        mDifficulty = Integer.parseInt(prefs.getLevel(context));
         thread = new GameThread(holder, context, new Handler() );
         setFocusable(true);
 	}
@@ -194,12 +208,10 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
 	}
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
-		// TODO Auto-generated method stub
 		thread.setSurfaceSize(width, height);
 	}
 
 	public void surfaceCreated(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
         thread.setRunning(true);
         thread.start();
 
@@ -207,7 +219,6 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
 	}
 
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
 		boolean retry = true;
         thread.setRunning(false);
         while (retry) {
@@ -218,6 +229,12 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
             }
         }
 	}
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		
+		return false;
+	}
 	
 }
 /*
@@ -227,7 +244,7 @@ public gameView(Context context) {
 	this.game=(Game)context;
 	setFocusable(true);
 	setFocusableInTouchMode(true);
-	// TODO Auto-generated constructor stub
+	// 
 }
 private float width; // width of one column
 private float height; // height of one ball
