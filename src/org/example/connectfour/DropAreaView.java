@@ -77,10 +77,19 @@ public class DropAreaView extends View{
     		mBallRect.set( iX, mCanvasHeight-mBallSize, iX+mBallSize, mCanvasHeight );
     		invalidate();
     }
+	public boolean checkClickOnBall(MotionEvent e)
+	{
+		Rect ballCord=mBallImage.getBounds();
+		int x=(int)e.getX();
+		if(x>ballCord.left && x<ballCord.right)
+			return true;
+		return false;
+	}
 	public void  onMove(float dx,float dy)
 	{
-		mBallRect=mBallImage.getBounds();
-		mBallRect.left=(int) dx;
+		mBallRect=mBallImage.copyBounds();
+		mBallRect.left+=(int) dx;
+		mBallRect.right+=(int)dx;
 		invalidate();
 	}
 
@@ -97,8 +106,8 @@ class GestureListener implements GestureDetector.OnGestureListener,
 
 	public boolean onDown(MotionEvent e) {
 		Log.v(DEBUG_TAG, "onDown");
-		view.drawImage((int)(e.getX()));
-		return true;
+		//view.drawImage((int)(e.getX()));
+		return view.checkClickOnBall(e);
 	}
 
 	public boolean onFling(MotionEvent e1, MotionEvent e2,
@@ -120,8 +129,8 @@ class GestureListener implements GestureDetector.OnGestureListener,
 	public boolean onScroll(MotionEvent e1, MotionEvent e2,
 			float distanceX, float distanceY) {
 		Log.v(DEBUG_TAG, "onScroll");
-
-		view.onMove(distanceX, distanceY);
+		
+		view.onMove(-distanceX,-distanceY);
 		return true;
 	}
 

@@ -20,12 +20,12 @@ import android.view.SurfaceView;
 import android.view.animation.AnimationUtils;
 
 public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
-	
+        
 
-	private static final String TAG = "PuzzleView";
-	class GameThread extends Thread
-	{
-		/*
+        private static final String TAG = "PuzzleView";
+        class GameThread extends Thread
+        {
+                /*
          * Difficulty setting constants
          */
         public static final int DIFFICULTY_LEVEL_1 = 3;
@@ -88,15 +88,15 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
         }
         @Override
         public void run() {
-        	
-			
-			
+                
+                        
+                        
             while (mRun) {
-            	try {
-    				Thread.sleep(30);
-    			} catch (InterruptedException e) {
-    				e.printStackTrace();
-    			}
+                try {
+                                Thread.sleep(30);
+                        } catch (InterruptedException e) {
+                                e.printStackTrace();
+                        }
                 Canvas c = null;
                 try {
                     c = mSurfaceHolder.lockCanvas(null);
@@ -136,9 +136,9 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
             }
         }
         public void setState(int mode, CharSequence message) {
-        	synchronized (mSurfaceHolder) {
+                synchronized (mSurfaceHolder) {
                 mMode = mode;
-        	}
+                }
         }
         public void setSurfaceSize(int width, int height) {
             // synchronized to make sure these all change atomically
@@ -150,7 +150,7 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
                 mBackgroundImage = Bitmap.createScaledBitmap(
                        mBackgroundImage, width, Bgheight, true);
                 mCellSpace=(int)(mCanvasWidth/7);
-            	mGridTop=(int)(mCanvasHeight*0.2);
+                mGridTop=(int)(mCanvasHeight*0.2);
             }
         }
         public void unpause() {
@@ -169,57 +169,57 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
             boolean handled = false;
 
             synchronized (mSurfaceHolder) {
-            	
+                
             }
             return handled;
         }
         private void doDraw(Canvas canvas) {
-        	//canvas.drawBitmap(mBackgroundImage, 0,(int)(mCanvasHeight*0.2), null);
+                //canvas.drawBitmap(mBackgroundImage, 0,(int)(mCanvasHeight*0.2), null);
 
-        	Paint CLine=new Paint();
-        	CLine.setARGB(255, 0, 0, 0);
-        	Paint CBackground=new Paint();
-        	CBackground.setARGB(200,100,100,100);
-        	canvas.drawRect(0,0,getWidth(),getHeight(),CBackground);
-        	
-        	for(int start=2;start<mCanvasWidth;start=start+mCellSpace)
-        		canvas.drawLine(start, 0, start, mCanvasHeight-2, CLine);
-        	canvas.drawLine(2,mCanvasHeight-2,mCanvasWidth-2,mCanvasHeight-2,CLine);
+                Paint CLine=new Paint();
+                CLine.setARGB(255, 0, 0, 0);
+                Paint CBackground=new Paint();
+                CBackground.setARGB(200,100,100,100);
+                canvas.drawRect(0,0,getWidth(),getHeight(),CBackground);
+                
+                for(int start=2;start<mCanvasWidth;start=start+mCellSpace)
+                        canvas.drawLine(start, 0, start, mCanvasHeight-2, CLine);
+                canvas.drawLine(2,mCanvasHeight-2,mCanvasWidth-2,mCanvasHeight-2,CLine);
 
         }
-	}
+        }
     private GameThread thread;
     private static int mDifficulty; 
-	public GameThread getThread() {
+        public GameThread getThread() {
         return thread;
     }
-	public gameView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		 // register our interest in hearing about changes to our surface
+        public gameView(Context context, AttributeSet attrs) {
+                super(context, attrs);
+                 // register our interest in hearing about changes to our surface
         SurfaceHolder holder = getHolder();
         holder.addCallback(this);
         mDifficulty = Integer.parseInt(prefs.getLevel(context));
         thread = new GameThread(holder, context, new Handler() );
         setFocusable(true);
-	}
-	 @Override
-	 public void onWindowFocusChanged(boolean hasWindowFocus) {
-	        if (!hasWindowFocus) thread.pause();
-	}
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
-		thread.setSurfaceSize(width, height);
-	}
+        }
+         @Override
+         public void onWindowFocusChanged(boolean hasWindowFocus) {
+                if (!hasWindowFocus) thread.pause();
+        }
+        public void surfaceChanged(SurfaceHolder holder, int format, int width,
+                        int height) {
+                thread.setSurfaceSize(width, height);
+        }
 
-	public void surfaceCreated(SurfaceHolder holder) {
+        public void surfaceCreated(SurfaceHolder holder) {
         thread.setRunning(true);
         thread.start();
 
-		
-	}
+                
+        }
 
-	public void surfaceDestroyed(SurfaceHolder holder) {
-		boolean retry = true;
+        public void surfaceDestroyed(SurfaceHolder holder) {
+                boolean retry = true;
         thread.setRunning(false);
         while (retry) {
             try {
@@ -228,23 +228,23 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
             } catch (InterruptedException e) {
             }
         }
-	}
-	@Override
-	public boolean onTouchEvent(MotionEvent event)
-	{
-		
-		return false;
-	}
-	
+        }
+        @Override
+        public boolean onTouchEvent(MotionEvent event)
+        {
+                
+                return false;
+        }
+        
 }
 /*
 private  final Game game;
 public gameView(Context context) {
-	super(context);
-	this.game=(Game)context;
-	setFocusable(true);
-	setFocusableInTouchMode(true);
-	// 
+        super(context);
+        this.game=(Game)context;
+        setFocusable(true);
+        setFocusableInTouchMode(true);
+        // 
 }
 private float width; // width of one column
 private float height; // height of one ball
@@ -267,7 +267,7 @@ rect.set((int) (x * width), (int) (y * height), (int) (x
 @Override
 protected void onDraw(Canvas canvas) {
 // Drawing commands go here
-	Paint background= new Paint();
-	background.setColor(getResources().getColor(R.color.c4_background));
-	canvas.drawRect(0,0,getWidth(),getHeight(),background);
+        Paint background= new Paint();
+        background.setColor(getResources().getColor(R.color.c4_background));
+        canvas.drawRect(0,0,getWidth(),getHeight(),background);
 }*/

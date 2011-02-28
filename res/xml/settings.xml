@@ -12,5 +12,7 @@
 	  	android:key="level"
 	  	android:entries="@array/listLevels"
 	  	android:entryValues="@array/levelReturnValue"
-	  	android:defaultValue="1"/>
+	  	android:defaultValue="1"
+	  />
+	 
 </PreferenceScreen>
