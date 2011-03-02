@@ -33,7 +33,6 @@ public final class R {
     public static final class id {
         public static final int ballDrop=0x7f090002;
         public static final int c4game=0x7f090001;
-        public static final int c4game1=0x7f09000d;
         public static final int continue_button=0x7f090007;
         public static final int drawArea=0x7f090000;
         public static final int exit_button=0x7f090009;
@@ -41,13 +40,13 @@ public final class R {
         public static final int multiplayer_game_button=0x7f090006;
         public static final int new_game_button=0x7f090005;
         public static final int setpreference=0x7f090008;
-        public static final int settings=0x7f090010;
+        public static final int settings=0x7f09000f;
         public static final int text=0x7f090003;
         public static final int widget38=0x7f09000a;
         public static final int widget39=0x7f09000c;
-        public static final int widget40=0x7f09000f;
+        public static final int widget40=0x7f09000e;
         public static final int widget41=0x7f09000b;
-        public static final int widget44=0x7f09000e;
+        public static final int widget44=0x7f09000d;
     }
     public static final class layout {
         public static final int game=0x7f030000;

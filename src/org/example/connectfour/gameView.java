@@ -214,7 +214,6 @@ public class gameView extends SurfaceView implements SurfaceHolder.Callback  {
         public void surfaceCreated(SurfaceHolder holder) {
         thread.setRunning(true);
         thread.start();
-
                 
         }
 

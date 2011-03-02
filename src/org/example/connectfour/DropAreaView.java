@@ -13,10 +13,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 public class DropAreaView extends View{
-	private Matrix translate; 
+	private C4_game mC4Game;
 	private Drawable mBallImage;
-    private int mBallHeight;
-    private int mBallWidth;
     private int mCanvasWidth;
     private int mCanvasHeight;
     private float totalAnimDx;
@@ -36,6 +34,10 @@ public class DropAreaView extends View{
 		mBallRect=new Rect();
 		mColumns=7;
 		
+	}
+	public void setGame(C4_game game)
+	{
+		this.mC4Game=game;
 	}
 	public void onAnimateMove(float dx, float dy)
 	{

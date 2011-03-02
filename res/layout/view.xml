@@ -3,6 +3,7 @@
 	android:id="@+id/widget38"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
+	android:background="@color/c4_background"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	>
 	<FrameLayout
@@ -12,10 +13,10 @@
 		android:layout_below="@+id/widget39"
 		android:layout_alignParentLeft="true"
 	>
-	 	<org.example.connectfour.gameView
+	 	<!--  <org.example.connectfour.gameView
       		android:id="@+id/c4game1"
       		android:layout_width="fill_parent"
-      		android:layout_height="fill_parent"/>
+      		android:layout_height="fill_parent"/>-->
 	</FrameLayout>
 	<FrameLayout
 		android:id="@+id/widget44"
