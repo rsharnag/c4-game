@@ -1,14 +1,14 @@
 package org.example.connectfour;
 
-import org.example.connectfour.gameView.GameThread;
+//import org.example.connectfour.gameView.GameThread;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
 import android.widget.FrameLayout;
 public class Game extends Activity{
-	private GameThread mgameThread; 
-	private gameView mC4View;
+	//private GameThread mgameThread; 
+	//private gameView mC4View;
 	public static int mRows;
 	public static int mNumToConnect;
 	public static int mColumns;
